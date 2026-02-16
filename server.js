@@ -83,7 +83,8 @@ app.get("/skills", (req, res) => fetchDriveJson(SKILLS_FILE_ID, res));
 
 // --- CATCH-ALL ROUTE ---
 // Important for deployment: If a user refreshes a sub-page, serve index.html
-app.get('/*', (req, res) => {
+// NEW — works on Render and avoids PathError
+app.use((req, res, next) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
